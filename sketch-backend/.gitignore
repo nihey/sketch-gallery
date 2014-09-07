@@ -1,0 +1,7 @@
+*.pyc
+
+# Virtual Environment
+env
+
+# VIM temporary file
+*.swp
