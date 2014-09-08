@@ -7,6 +7,8 @@ from storm.tracer import debug
 
 from sketch.database.runtime import *
 
+from sketch.models.sketches import *
+
 
 if __name__ == '__main__':
     store = get_default_store()

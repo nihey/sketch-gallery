@@ -5,6 +5,7 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.resource('sketch', {path: '/:sketch_url'});
 });
 
 export default Router;

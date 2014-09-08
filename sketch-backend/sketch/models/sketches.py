@@ -25,6 +25,7 @@ class Sketch(BaseModel):
     # Implicit Properties
     #
 
+    @property
     def json_data(self):
         with open(self.file_path()) as sketch_file:
             return sketch_file.read()
@@ -34,7 +35,7 @@ class Sketch(BaseModel):
     #
 
     def filename(self):
-        data = str(self.id) + str(self.activity.creation_date)
+        data = str(self.id) + str(self.creation_date)
         filename = md5(data).hexdigest() + str(self.id)
         return filename + '.json'
 

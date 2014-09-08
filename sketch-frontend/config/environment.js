@@ -13,8 +13,7 @@ module.exports = function(environment) {
     },
 
     APP: {
-      // Here you can pass flags/options to your application instance
-      // when it is created
+      host: 'http://localhost:5000/api',
     }
   };
 

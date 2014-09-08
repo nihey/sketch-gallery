@@ -35,11 +35,11 @@ class SketchResource(BaseResource):
 
     def post(self):
         url = request.form['url']
-        email = request.form['email']
+        email = request.form.get('email', u'')
         json_data = request.form['json']
 
         try:
-            json.parse(json_data)
+            json.loads(json_data)
         except ValueError:
             return json_response(400, {'error': 'Malformed JSON'})
 
