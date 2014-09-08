@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
   actions: {
 
     animate: function() {
-      this.get('sketchpad').animate(10);
+      this.get('sketchpad').animate(7);
     },
 
     submitSketch: function() {

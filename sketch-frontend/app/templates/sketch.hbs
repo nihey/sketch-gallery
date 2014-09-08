@@ -2,9 +2,7 @@
   <canvas id="sketchpad"></canvas>
   {{#unless readOnly}}
     {{input value=email type="email" class="form-control" placeholder="Email"}}
-  {{/unless}}
-  <input type="button" class="btn btn-primary btn-lg" value="Animate" {{action 'animate' on="click"}}>
-  {{#unless readOnly}}
-  <input type="submit" class="btn btn-primary btn-lg" value="Done">
+    <input type="button" class="btn btn-primary btn-lg" value="Animate" {{action 'animate' on="click"}}>
+    <input type="submit" class="btn btn-primary btn-lg" value="Done">
   {{/unless}}
 </form>

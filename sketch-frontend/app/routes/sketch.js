@@ -5,6 +5,7 @@ export default Ember.Route.extend({
 
   setupController: function(controller, model) {
     controller.set('model', model);
+    controller.set('readOnly', true);
 
     SketchUtils.ajax({
       type: 'GET',
@@ -18,6 +19,9 @@ export default Ember.Route.extend({
             strokes = JSON.parse(sketch[0].json_data).strokes;
             controller.set('readOnly', true);
         }
+        else {
+          controller.set('readOnly', false);
+        }
 
         var sketchpad = new Sketchpad({
           element: '#sketchpad',
@@ -26,6 +30,10 @@ export default Ember.Route.extend({
           strokes: strokes,
           readOnly: readOnly,
         });
+        if (readOnly) {
+          sketchpad.animate(7, true, 1500);
+        }
+
         controller.set('sketchpad', sketchpad);
       },
     });
