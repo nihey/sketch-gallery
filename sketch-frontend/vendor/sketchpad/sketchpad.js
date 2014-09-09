@@ -32,9 +32,6 @@ function Sketchpad(config) {
   // Undo History
   this.undoHistory = config.undoHistory || [];
 
-  // Animation function calls
-  this.animateIds = [];
-
   //
   // Private API
   //
@@ -168,20 +165,14 @@ function Sketchpad(config) {
         var line = stroke.lines[j];
         var callback = this._draw.bind(this, line.start, line.end,
                                        stroke.color, stroke.size);
-        this.animateIds.push(setTimeout(callback, delay));
+        setTimeout(callback, delay);
         delay += ms;
       }
     }
     if (loop) {
       loopDelay = loopDelay || 0;
       var callback = this.animate.bind(this, ms, loop, loopDelay);
-      this.animateIds.push(setTimeout(callback, delay + loopDelay));
-    }
-  };
-
-  this.cancelAnimation = function() {
-    for (var i = 0; i < this.animateIds.length; i++) {
-      clearTimeout(this.animateIds[i]);
+      setTimeout(callback, delay + loopDelay);
     }
   };
 
