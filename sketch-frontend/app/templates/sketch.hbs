@@ -1,4 +1,14 @@
 <form class="box-container" {{action 'submitSketch' on="submit"}}>
+  {{#unless readOnly}}
+    <div class="sketchpad-tools">
+      <div class="sketchpad-color" style="background-color: #3071A9" {{action 'undo' on='click'}}>
+        <div class="glyphicon glyphicon-chevron-left"></div>
+      </div>
+      <div class="sketchpad-color" style="background-color: #3071A9" {{action 'redo' on='click'}}>
+        <div class="glyphicon glyphicon-chevron-right"></div>
+      </div>
+    </div>
+  {{/unless}}
   <canvas id="sketchpad" class="sketchpad"></canvas>
   {{#unless readOnly}}
     {{input value=email type="email" class="form-control" placeholder="Email"}}

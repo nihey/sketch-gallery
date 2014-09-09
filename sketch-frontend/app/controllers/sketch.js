@@ -5,6 +5,14 @@ export default Ember.Controller.extend({
 
   actions: {
 
+    redo: function() {
+      this.get('sketchpad').redo();
+    },
+
+    undo: function() {
+      this.get('sketchpad').undo();
+    },
+
     animate: function() {
       this.get('sketchpad').animate(7);
     },
@@ -24,7 +32,7 @@ export default Ember.Controller.extend({
         url: SketchENV.APP.host + '/sketches',
         data: data,
         success: function() {
-            location.reload();
+            this.transitionToRoute('/');
         },
         error: function(xhr) {
           this.set('formFailed', true);

@@ -4,6 +4,11 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var app = new EmberApp();
 app.import('vendor/sketchpad/sketchpad.js');
+app.import(
+    'bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff', {
+        destDir: 'fonts',
+    }
+);
 
 // Use `app.import` to add additional libraries to the generated
 // output files.

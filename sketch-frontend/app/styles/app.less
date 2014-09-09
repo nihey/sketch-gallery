@@ -10,6 +10,26 @@
   box-shadow: 2px 2px 5px 0px rgba(50, 50, 50, 0.75);
 }
 
+.sketchpad-tools {
+  max-width: 400px;
+}
+
+.sketchpad-tools > * {
+  display: inline-block;
+}
+
+.sketchpad-color {
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.sketchpad-color > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .box {
   max-width: 500px;
   margin: 20px auto;
@@ -26,17 +46,13 @@
   text-align: center;
 }
 
-.box-container button, .box-container input{
+.box-container > button, .box-container > input{
   width: 230px;
 }
 
 .box-container > * {
   display: block;
   margin: 7px auto;
-}
-
-.box-container button, .box-container input{
-  width: 230px;
 }
 
 .box-max {
