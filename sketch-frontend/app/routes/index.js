@@ -13,4 +13,8 @@ export default Ember.Route.extend({
       },
     });
   },
+
+  resetController: function(controller) {
+    controller.set('sketches', []);
+  }
 });

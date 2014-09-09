@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import json
+import re
 
 from flask import request
 from flask.ext.restful import fields, marshal
@@ -35,6 +36,7 @@ class SketchResource(BaseResource):
 
     def post(self):
         url = request.form['url']
+        url = re.sub("[\W]", "_", url.strip())
         email = request.form.get('email', u'')
         json_data = request.form['json']
 

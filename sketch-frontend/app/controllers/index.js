@@ -8,6 +8,8 @@ export default Ember.Controller.extend({
       this.set('formError', false);
       var sketches = this.get('sketches');
       var artwork = this.get('artwork');
+      // FIXME Find a better solution later
+      artwork = artwork.replace(/\W/g, '');
       for (var i = 0; i < sketches.length; i++) {
         if (artwork === sketches[i].url) {
           this.set('formError', true);
