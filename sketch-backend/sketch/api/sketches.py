@@ -17,14 +17,13 @@ from sketch.database.runtime import get_default_store
 
 
 @FinalResource
-class SketchResource(BaseResource):
+class SketchesResource(BaseResource):
 
     properties = {
         'id': fields.Integer,
         'url': fields.String,
         'email': fields.String,
-        'created_on': DateTimeInt,
-        'json_data': fields.String,
+        'creation_date': DateTimeInt,
     }
 
     table = Sketch
@@ -63,5 +62,25 @@ class SketchResource(BaseResource):
         return marshal(sketch, self.properties)
 
 
+@FinalResource
+class SketchResource(BaseResource):
+
+    properties = {
+        'id': fields.Integer,
+        'url': fields.String,
+        'email': fields.String,
+        'creation_date': DateTimeInt,
+        'json_data': fields.String,
+    }
+
+    table = Sketch
+
+    filters = {
+        'url': Sketch.url,
+        'email': Sketch.email,
+    }
+
+
 def register_sketches_resources():
-    api.add_resource(SketchResource, '/sketches', endpoint='sketches')
+    api.add_resource(SketchesResource, '/sketches', endpoint='sketches')
+    api.add_resource(SketchResource, '/sketches/<id>', endpoint='sketch')
