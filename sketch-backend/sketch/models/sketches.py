@@ -16,6 +16,7 @@ class Sketch(BaseModel):
 
     url = Unicode()
     email = Unicode()
+    ip_address = Unicode()
     creation_date = DateTime()
 
     def __init__(self):

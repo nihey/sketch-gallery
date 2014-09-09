@@ -13,7 +13,7 @@ module.exports = function(environment) {
     },
 
     APP: {
-      host: 'http://localhost:5000/api',
+      host: 'http://localhost:50000/api',
     }
   };
 
@@ -30,7 +30,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.APP.host = 'http://api.gallery.nihas.net/api';
   }
 
   return ENV;

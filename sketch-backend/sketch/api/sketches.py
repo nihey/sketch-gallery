@@ -46,6 +46,7 @@ class SketchResource(BaseResource):
         sketch = Sketch()
         sketch.url = url
         sketch.email = email
+        sketch.ip_address = unicode(request.remote_addr)
 
         store = get_default_store()
         store.add(sketch)
