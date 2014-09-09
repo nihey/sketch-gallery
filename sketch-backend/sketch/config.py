@@ -8,6 +8,7 @@ class Config(object):
     DB_NAME = 'sketch'
     DB_USER = 'sketch'
     DB_PASS = ''
+    DB_PORT = '5432'
     DB_HOST = 'localhost'
 
     ALLOWED_DOMAIN = 'http://localhost:4200'
