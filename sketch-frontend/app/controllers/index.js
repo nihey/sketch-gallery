@@ -38,7 +38,7 @@ export default Ember.Controller.extend({
         strokes: strokes,
         readOnly: true,
       });
-      sketchpad.animate(7, true, 1500);
+      sketchpad.animate(10);
     },
   },
 });
