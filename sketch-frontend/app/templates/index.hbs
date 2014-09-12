@@ -5,9 +5,11 @@
   {{input value=artwork type="text" class="form-control" placeholder="Artwork title"}}
   <input type="submit" class="btn btn-primary btn-lg" value="Draw!">
 </form>
-<div class="box box-max">
+<div class="box box-max box-sketches">
   {{#each sketch in sketches}}
-    <canvas {{bind-attr id="sketch.url"}} class="sketchpad sketchpad-mini box-inline" data-width="400" data-height="400"></canvas>
+    {{#link-to 'sketch' sketch.url}}
+      <canvas {{bind-attr id="sketch.url"}} class="sketchpad sketchpad-mini box-inline" data-width="400" data-height="400"></canvas>
+    {{/link-to}}
     {{trigger-event this 'setupSketch' sketch}}
   {{/each}}
 </div>
