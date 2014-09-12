@@ -9,31 +9,32 @@ export default Ember.Route.extend({
 
     SketchUtils.ajax({
       type: 'GET',
-      data: {url: model.sketch_url},
-      url: SketchENV.APP.host + '/sketches',
+      url: SketchENV.APP.host + '/sketches/' + model.sketch_url,
       success: function(sketch) {
-        var readOnly = false;
-        var strokes = [];
-        if(sketch.length > 0) {
-            readOnly = true;
-            strokes = JSON.parse(sketch[0].json_data).strokes;
-            controller.set('readOnly', true);
-        }
-        else {
-          controller.set('readOnly', false);
-        }
+        controller.set('readOnly', true);
+        var strokes = JSON.parse(sketch.json_data).strokes;
 
         var sketchpad = new Sketchpad({
           element: '#sketchpad',
           width: 400,
           height: 400,
           strokes: strokes,
-          readOnly: readOnly,
+          readOnly: true,
         });
-        if (readOnly) {
-          sketchpad.animate(7, true, 1500);
+        sketchpad.animate(7, true, 1500);
+        controller.set('sketchpad', sketchpad);
+      },
+      error: function(xhr) {
+        if (xhr.status != 404) {
+          return;
         }
-
+        controller.set('readOnly', false);
+        var sketchpad = new Sketchpad({
+          element: '#sketchpad',
+          width: 400,
+          height: 400,
+          readOnly: false,
+        });
         controller.set('sketchpad', sketchpad);
       },
     });

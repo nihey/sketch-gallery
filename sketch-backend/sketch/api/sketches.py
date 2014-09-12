@@ -75,10 +75,9 @@ class SketchResource(BaseResource):
 
     table = Sketch
 
-    filters = {
-        'url': Sketch.url,
-        'email': Sketch.email,
-    }
+    id_column = Sketch.url
+
+    id_type = unicode
 
 
 def register_sketches_resources():

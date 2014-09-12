@@ -14,7 +14,7 @@ export default Ember.Route.extend({
             var sketch = sketches[i];
             SketchUtils.ajax({
               type: 'GET',
-              url: SketchENV.APP.host + '/sketches/' + sketch.id,
+              url: SketchENV.APP.host + '/sketches/' + sketch.url,
               success: function(sketch) {
                 sketch.initialized = false;
                 controller.get('sketches').pushObject(sketch);

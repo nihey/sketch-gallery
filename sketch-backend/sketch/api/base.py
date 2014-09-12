@@ -15,6 +15,10 @@ class BaseResource(Resource):
 
     table = None
 
+    id_column = None
+
+    id_type = int
+
     order_by = None
 
     limit = None
@@ -51,8 +55,8 @@ class BaseResource(Resource):
         store = get_default_store()
 
         if id is not None:
-            id = int(id)
-            data = self.table.find(store, id)
+            id = self.id_type(id)
+            data = store.find(self.table, self.id_column == id).one()
             return data
 
         data = store.find(self.table)
