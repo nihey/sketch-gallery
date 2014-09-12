@@ -19,18 +19,26 @@ export default Ember.Controller.extend({
       this.transitionToRoute('/' + artwork);
     },
 
-    setupSketches: function() {
-      var sketches = this.get('sketches');
-      Ember.$(sketches).each(function (index, sketch) {
-        var strokes = JSON.parse(sketch.json_data).strokes;
+    setupSketch: function(sketch) {
+      if (Ember.$('#' + sketch.url).length == 0) {
+        setTimeout(function() {
+          this.send('setupSketch', sketch);
+        }.bind(this), 1000);
+        return;
+      }
+      if (sketch.initialized) {
+        return;
+      }
+      sketch.initialized = true;
 
-        var sketchpad = new Sketchpad({
-          element: '#' + sketch.url,
-          strokes: strokes,
-          readOnly: true,
-        });
-        sketchpad.animate(7, true, 1500);
+      var strokes = JSON.parse(sketch.json_data).strokes;
+
+      var sketchpad = new Sketchpad({
+        element: '#' + sketch.url,
+        strokes: strokes,
+        readOnly: true,
       });
+      sketchpad.animate(7, true, 1500);
     },
   },
 });

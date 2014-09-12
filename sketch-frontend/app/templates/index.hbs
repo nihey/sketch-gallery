@@ -8,8 +8,6 @@
 <div class="box box-max">
   {{#each sketch in sketches}}
     <canvas {{bind-attr id="sketch.url"}} class="sketchpad sketchpad-mini box-inline" data-width="400" data-height="400"></canvas>
+    {{trigger-event this 'setupSketch' sketch}}
   {{/each}}
-  {{#if sketches}}
-    {{trigger-event this 'setupSketches'}}
-  {{/if}}
 </div>
