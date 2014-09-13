@@ -10,6 +10,9 @@
     </div>
   {{/unless}}
   <canvas id="sketchpad" class="sketchpad"></canvas>
+  {{#if readOnly}}
+    <b class="artwork-title">{{ model.sketch_url }}</b>
+  {{/if}}
   {{#unless readOnly}}
     {{input value=email type="email" class="form-control" placeholder="Email"}}
     <input type="button" class="btn btn-primary btn-lg" value="Animate" {{action 'animate' on="click"}}>
