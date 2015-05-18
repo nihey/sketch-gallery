@@ -8,7 +8,7 @@ and [EmberJS](http://emberjs.com/) with [Sketchpad](http://yiom.github.io/sketch
 For specific building instructions, follow the README.md inside each folder:
 
 - [Frontend](https://github.com/nihey/sketch-gallery/tree/master/sketch-frontend)
-- Backend(TBA)
+- [Backend](https://github.com/nihey/sketch-gallery/tree/master/sketch-backend)
 
 # License
 
