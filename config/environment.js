@@ -2,8 +2,9 @@
 
 module.exports = function(environment) {
   var ENV = {
+    modulePrefix: 'sketch',
     environment: environment,
-    baseURL: '/sketch-gallery/',
+    baseURL: '/',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
@@ -13,24 +14,33 @@ module.exports = function(environment) {
     },
 
     APP: {
-      host: 'http://localhost:50000/api',
+      // Here you can pass flags/options to your application instance
+      // when it is created
     }
   };
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
-    ENV.APP.LOG_ACTIVE_GENERATION = true;
+    // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    ENV.APP.LOG_VIEW_LOOKUPS = true;
+    // ENV.APP.LOG_VIEW_LOOKUPS = true;
   }
 
   if (environment === 'test') {
-    ENV.baseURL = '/'; // Testem prefers this...
+    // Testem prefers this...
+    ENV.baseURL = '/';
+    ENV.locationType = 'none';
+
+    // keep test console output quieter
+    ENV.APP.LOG_ACTIVE_GENERATION = false;
+    ENV.APP.LOG_VIEW_LOOKUPS = false;
+
+    ENV.APP.rootElement = '#ember-testing';
   }
 
   if (environment === 'production') {
-    ENV.APP.host = 'http://nihas.net:50000/api';
+    ENV.baseURL = '/sketch-gallery/';
   }
 
   return ENV;
