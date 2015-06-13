@@ -4,6 +4,8 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'sketch',
     environment: environment,
+    contentSecurityPolicy: { 'connect-src': "'self' wss://*.firebaseio.com" },
+    firebase: 'https://sketch-gallery.firebaseio.com/',
     baseURL: '/',
     locationType: 'auto',
     EmberENV: {
