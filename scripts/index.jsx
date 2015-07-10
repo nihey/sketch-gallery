@@ -33,7 +33,9 @@ var Index = React.createClass({
         </form>
       </div>
       {Object.keys(this.state.sketches).map(function(sketch, index) {
-        return <Canvas key={index} mini={true}/>;
+        return <a href={"#!/" + sketch}>
+          <Canvas key={index} mini={true}/>
+        </a>;
       })}
     </div>;
   },
