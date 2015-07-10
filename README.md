@@ -1,53 +1,95 @@
-# Sketch
+# Webpack Single Page Boilerplate
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+A boilerplate for a single page app using [webpack][webpack_link]
 
-## Prerequisites
+# Why should I use it
 
-You will need the following things properly installed on your computer.
+So far, this is the best way I found to build files like `index.html` into
+[webpack][webpack_link]. This boilerplate handles Javascript, CSS and HTML
+bundling using only [webpack][webpack_link].
 
-* [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM)
-* [Bower](http://bower.io/)
-* [Ember CLI](http://www.ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
+# Usage
 
-## Installation
+The general directory structure is:
 
-* `git clone <repository-url>` this repository
-* change into the new directory
-* `npm install`
-* `bower install`
+```
+├── assets/
+│   └── image
+│       └── favicon.png
+├── index.html
+├── package.json
+├── plugins
+│   └── html-plugin.js
+├── README.md
+├── scripts/
+│   └── index.js
+├── styles/
+│   └── index.less
+└── webpack.config.js
+```
 
-## Running / Development
+- Your javascript entry point is `scripts/index.js`
+- Your style entry point is `styles/index.less`
+- The `plugins/html-plugin.js` file is better explained on the *About* section,
+  with the `html-parser-plugin` plugin.
 
-* `ember server`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+There's a hack to build HTML files, replacing the `src` and `href` tags related
+to images into their corresponding file in `dist` directory. This way, a
+`index.html` file that looks like this:
 
-### Code Generators
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sample App</title>
+    <meta charset="utf-8"/>
+    <link href="!assets/image/favicon.png" rel="icon"/>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <script src="script.js"></script>
+  </body>
+</html>
+```
 
-Make use of the many generators for code, try `ember help generate` for more details
+Becomes this:
 
-### Running Tests
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sample App</title>
+    <meta charset="utf-8">
+    <link href="84eafba88857e5fd2e85d63beaf3fb31.png" rel="icon">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <script src="script.js"></script>
+  </body>
+</html>
+```
 
-* `ember test`
-* `ember test --server`
+Notice that the `favicon.png` file was replaced with
+`84eafba88857e5fd2e85d63beaf3fb31.png`. This happened because the favicon.png
+file link was marked with a `!` prepending it - it tells the plugin that the
+url should be bundled and replaced.
 
-### Building
+# About
 
-* `ember build` (development)
-* `ember build --environment production` (production)
+This boilerplate includes the following loaders:
 
-### Deploying
+  - `babel-loader`: Enable ES6 features.
+  - `file-loader`: Call `require` for binary files.
+  - `img-loader`: Optimize image compression.
+  - `json-loader`: Call `require` for `json` files.
+  - `less-loader`: Style your pages with [less](http://lesscss.org/).
+  - `style-loader`: Add exports of a module as style to DOM.
 
-Specify what it takes to deploy your app.
+It also includes the following plugins:
 
-## Further Reading / Useful Links
+  - `extract-text-webpack-plugin`: Extract css text from bundled styles.
+  - `html-parser-plugin`: Custom experimental plugin to enable html parsing
+                          on webpack. It is used to emit a `index.html` file
+                          along with it's images.
 
-* [ember.js](http://emberjs.com/)
-* [ember-cli](http://www.ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
-
+[webpack_link]: http://webpack.github.io/
