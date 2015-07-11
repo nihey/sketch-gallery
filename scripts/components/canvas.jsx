@@ -8,12 +8,31 @@ var Canvas = React.createClass({
     return this.sketchpad[func]();
   },
 
-  componentDidMount: function() {
-    this.sketchpad = new Sketchpad({
+  tryInit: function(props) {
+    var settings = {
       element: this.refs.canvas.getDOMNode(),
       width: 400,
       height: 400,
-    });
+    };
+
+    if (props.sketch) {
+      settings = $.extend(settings, props.sketch);
+      settings.readOnly = true;
+    }
+
+    this.sketchpad = new Sketchpad(settings);
+
+    if (props.sketch) {
+      this.sketchpad.animate(7);
+    }
+  },
+
+  componentWillReceiveProps: function(props) {
+    this.props.lazy && this.tryInit(props);
+  },
+
+  componentDidMount: function() {
+    this.props.lazy || this.tryInit(this.props);
   },
 
   render: function() {

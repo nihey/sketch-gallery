@@ -28,13 +28,14 @@ var Index = React.createClass({
     return <div>
       <div>
         <form onSubmit={this.draw}>
-          <input ref="artwork" placeholder="artwork name" type="text"/>
+          <input required="true" ref="artwork" placeholder="artwork name" type="text"/>
           <button>draw</button>
         </form>
       </div>
-      {Object.keys(this.state.sketches).map(function(sketch, index) {
-        return <a href={"#!/" + sketch}>
-          <Canvas key={index} mini={true}/>
+      {Object.keys(this.state.sketches).map((sketch, index) => {
+        var settings = this.state.sketches[sketch].sketch;
+        return <a href={"#!/" + sketch} key={index}>
+          <Canvas sketch={settings} mini={true}/>
         </a>;
       })}
     </div>;
