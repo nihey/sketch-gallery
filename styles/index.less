@@ -4,6 +4,11 @@ html, body, #react-body {
   height: 100%;
 }
 
+@font-face {
+  font-family: "Iron and Brine";
+  src: url('../assets/fonts/iron-and-brine.ttf');
+}
+
 #react-body {
   text-align: center;
 }
@@ -36,6 +41,7 @@ canvas {
   margin-top: 3em;
   margin-bottom: 1em;
   animation: fade-in 2s;
+  transition: 0.4s background ease-out;
 }
 
 canvas.sketchpad-mini {
@@ -43,6 +49,10 @@ canvas.sketchpad-mini {
   cursor: pointer;
   width: 100px;
   height: 100px;
+}
+
+canvas.sketchpad-mini:hover {
+  background: #bbb;
 }
 
 form {
@@ -89,4 +99,21 @@ button {
 
 button:hover {
   background: #0EB4DB;
+}
+
+.artwork-name, .artwork-name a {
+  color: #000;
+  text-decoration: none;
+  font-family: "Iron and Brine", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 2em;
+  font-weight: bold;
+  transition: 0.3s color ease-out;
+}
+
+.artwork-name a[href^=http] {
+  color: #667369;
+}
+
+.artwork-name a[href^=http]:hover {
+  color: #000;
 }

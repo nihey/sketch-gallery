@@ -8,8 +8,19 @@ var Index = React.createClass({
   componentDidMount: function() {
     $.ajax({
       url: Config.FIREBASE_URL + '/sketches.json',
+      data: {shallow: true},
       success: function(data) {
-        this.setState({sketches: data || {}});
+        var sketches = {};
+        data && Object.keys(data).forEach(name => {
+          $.ajax({
+            url: Config.FIREBASE_URL + '/sketches/' + name + '.json',
+            context: this,
+            success: function(sketch) {
+              sketches[name] = sketch;
+              this.setState({sketches: sketches});
+            },
+          });
+        });
       },
       context: this,
     });
@@ -35,7 +46,7 @@ var Index = React.createClass({
       {Object.keys(this.state.sketches).map((sketch, index) => {
         var settings = this.state.sketches[sketch].sketch;
         return <a href={"#!/" + sketch} key={index}>
-          <Canvas sketch={settings} mini={true}/>
+          <Canvas name={sketch} sketch={settings} mini={true}/>
         </a>;
       })}
     </div>;

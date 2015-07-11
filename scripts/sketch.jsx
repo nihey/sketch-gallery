@@ -27,9 +27,29 @@ var Sketch = React.createClass({
     });
   },
 
+  getName: function() {
+    // If no link is provided simply return the artwork name
+    if (!this.state.website) {
+      return location.hash.replace('#!/', '');
+    }
+    return <a href={this.state.website}>
+      {location.hash.replace('#!/', '')}
+    </a>
+  },
+
   getEditor: function() {
-    if (!this.state.editor) {
-      return;
+    // If neither and editor or a sketch is provided, don't show anything
+    if (!this.state.editor && !this.state.sketch) {
+      return null;
+    }
+
+    // If a sketch is provided, use it
+    if (!this.state.editor && this.state.sketch) {
+      return <div>
+        <div className="artwork-name">
+          {this.getName()}
+        </div>
+      </div>;
     }
 
     return <form onSubmit={this.submit}>
@@ -52,7 +72,7 @@ var Sketch = React.createClass({
     $.ajax({
       url: Config.FIREBASE_URL + '/sketches/' + location.hash.replace('#!/', '') + '.json',
       success: function(data) {
-        data && this.setState({sketch: data.sketch});
+        data && this.setState({sketch: data.sketch, website: data.website});
         data || this.setState({editor: true});
       },
       context: this,
@@ -60,7 +80,10 @@ var Sketch = React.createClass({
   },
 
   render: function() {
-    return <div>
+    return <div style={{marginTop: '1em'}}>
+      <div>
+        <a href="#!/"><button>back</button></a>
+      </div>
       <div>
         <Canvas lazy={true} sketch={this.state.sketch} ref="pad"/>
       </div>

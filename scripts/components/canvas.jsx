@@ -18,12 +18,17 @@ var Canvas = React.createClass({
     if (props.sketch) {
       settings = $.extend(settings, props.sketch);
       settings.readOnly = true;
+      this.props.mini || $(this.refs.canvas.getDOMNode()).css({cursor: 'default'});
     }
 
-    this.sketchpad = new Sketchpad(settings);
+    try {
+      this.sketchpad = new Sketchpad(settings);
 
-    if (props.sketch) {
-      this.sketchpad.animate(7);
+      if (props.sketch) {
+        this.sketchpad.animate(7);
+      }
+    } catch(err) {
+      console.error(this.props.name, '->', err);
     }
   },
 
