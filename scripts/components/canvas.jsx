@@ -1,6 +1,13 @@
 var React = require('react'),
     Sketchpad = require('exports?Sketchpad!../../node_modules/sketchpad/scripts/sketchpad.js');
 
+// Monkey patch that avoids crashing when strokes have no lines
+var UnpatchedDrawStroke = Sketchpad.prototype.drawStroke;
+Sketchpad.prototype.drawStroke = function(stroke) {
+  stroke.lines = stroke.lines || [];
+  UnpatchedDrawStroke.call(this, stroke);
+};
+
 window.$ = require('jquery');
 
 var Canvas = React.createClass({
