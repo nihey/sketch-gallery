@@ -1,6 +1,7 @@
 var React = require('react'),
     $ = require('jquery'),
-    Canvas = require('components/canvas');
+    Canvas = require('components/canvas'),
+    {getArtworkName, encode} = require('utils');
 
 var Sketch = React.createClass({
   call: function(func) {
@@ -14,7 +15,7 @@ var Sketch = React.createClass({
     event.preventDefault();
 
     $.ajax({
-      url: Config.FIREBASE_URL + '/sketches/' + location.hash.replace('#!/', '') + '.json',
+      url: Config.FIREBASE_URL + '/sketches/' + encode(getArtworkName()) + '.json',
       type: 'PUT',
       data: JSON.stringify({
         website: this.refs.website.getDOMNode().value,
@@ -30,10 +31,10 @@ var Sketch = React.createClass({
   getName: function() {
     // If no link is provided simply return the artwork name
     if (!this.state.website) {
-      return location.hash.replace('#!/', '');
+      return getArtworkName();
     }
     return <a href={this.state.website}>
-      {location.hash.replace('#!/', '')}
+      {getArtworkName()}
     </a>
   },
 
@@ -70,7 +71,7 @@ var Sketch = React.createClass({
 
   componentDidMount: function() {
     $.ajax({
-      url: Config.FIREBASE_URL + '/sketches/' + location.hash.replace('#!/', '') + '.json',
+      url: Config.FIREBASE_URL + '/sketches/' + encode(getArtworkName()) + '.json',
       success: function(data) {
         data && this.setState({sketch: data.sketch, website: data.website});
         data || this.setState({editor: true});

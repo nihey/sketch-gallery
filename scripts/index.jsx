@@ -1,7 +1,8 @@
 var React = require('react'),
     $ = require('jquery'),
     Canvas = require('components/canvas'),
-    Sketch = require('sketch');
+    Sketch = require('sketch'),
+    {getArtworkName, encode, decode} = require('utils');
 
 
 var Index = React.createClass({
@@ -28,7 +29,8 @@ var Index = React.createClass({
 
   draw: function(event) {
     event.preventDefault();
-    location.hash = '#!/' + this.refs.artwork.getDOMNode().value;
+    var name = this.refs.artwork.getDOMNode().value;
+    location.hash = '#!/' + encodeURIComponent(name);
   },
 
   getInitialState: function() {
@@ -45,7 +47,7 @@ var Index = React.createClass({
       </div>
       {Object.keys(this.state.sketches).map((sketch, index) => {
         var settings = this.state.sketches[sketch].sketch;
-        return <a href={"#!/" + sketch} key={index}>
+        return <a href={"#!/" + decode(sketch)} key={index}>
           <Canvas name={sketch} sketch={settings} mini={true}/>
         </a>;
       })}
