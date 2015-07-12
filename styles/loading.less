@@ -1,0 +1,40 @@
+/* Loading style from http://codepen.io/colortom/pen/ciGLC */
+
+.loading-wrapper {
+  margin-top: 5em;
+  transition: 3s all linear;
+}
+
+.finished {
+  opacity: 0;
+}
+
+.path {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 0;
+  animation: dash 5s linear  infinite;
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 2000;
+  }
+  90% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.path-2 {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash2 5s linear  infinite;
+}
+
+@keyframes dash2 {
+  60% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}

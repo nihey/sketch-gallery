@@ -81,7 +81,7 @@ var Sketch = React.createClass({
   },
 
   render: function() {
-    return <div style={{marginTop: '1em'}}>
+    return <div style={{paddingTop: '1em'}}>
       <div>
         <a href="#!/"><button>back</button></a>
       </div>

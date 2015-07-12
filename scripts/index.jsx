@@ -1,6 +1,7 @@
 var React = require('react'),
     $ = require('jquery'),
     Canvas = require('components/canvas'),
+    Loading = require('components/loading'),
     Sketch = require('sketch'),
     {getArtworkName, encode, decode} = require('utils');
 
@@ -18,7 +19,8 @@ var Index = React.createClass({
             context: this,
             success: function(sketch) {
               sketches[name] = sketch;
-              this.setState({sketches: sketches});
+              var loading = Object.keys(sketches).length !== Object.keys(data).length;
+              this.setState({sketches, loading});
             },
           });
         });
@@ -34,7 +36,10 @@ var Index = React.createClass({
   },
 
   getInitialState: function() {
-    return {sketches: {}};
+    return {
+      sketches: {},
+      loading: true,
+    };
   },
 
   render: function() {
@@ -51,6 +56,9 @@ var Index = React.createClass({
           <Canvas name={sketch} sketch={settings} mini={true}/>
         </a>;
       })}
+      <div>
+        <Loading active={this.state.loading}/>
+      </div>
     </div>;
   },
 });
