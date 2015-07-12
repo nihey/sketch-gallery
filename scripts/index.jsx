@@ -8,6 +8,8 @@ var React = require('react'),
 
 var Index = React.createClass({
   componentDidMount: function() {
+    // Work with Firebase REST API to avoid using concurrent connections
+    // while fetching data.
     $.ajax({
       url: Config.FIREBASE_URL + '/sketches.json',
       data: {shallow: true},
@@ -59,6 +61,11 @@ var Index = React.createClass({
       })}
       <div>
         <Loading active={this.state.loading}/>
+      </div>
+      <div className="fork-me">
+        <a target="__blank" href="https://github.com/nihey/sketch-gallery">
+          <i className="fa fa-github"></i>
+        </a>
       </div>
     </div>;
   },
