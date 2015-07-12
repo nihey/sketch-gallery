@@ -33,7 +33,7 @@ module.exports = {
     new HtmlPlugin('index.html'),
     new webpack.DefinePlugin({
       Config: JSON.stringify({
-        FIREBASE_URL: 'https://sketch-gallery.firebaseio.com',
+        FIREBASE_URL: 'https://sketch-gallery-test.firebaseio.com',
       }),
     }),
   ],

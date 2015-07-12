@@ -13,6 +13,7 @@ var Index = React.createClass({
       data: {shallow: true},
       success: function(data) {
         var sketches = {};
+        data || this.setState({loading: false});
         data && Object.keys(data).forEach(name => {
           $.ajax({
             url: Config.FIREBASE_URL + '/sketches/' + name + '.json',

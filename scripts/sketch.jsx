@@ -13,12 +13,19 @@ var Sketch = React.createClass({
 
   submit: function(event) {
     event.preventDefault();
+    this.setState({loading: true});
+
+    var website = this.refs.website.getDOMNode().value.trim().toLowerCase();
+    if (website.substr(0, 7) !== 'http://' && website.substr(0, 8) !== 'https://' &&
+        website !== '') {
+      website = 'http://' + website;
+    }
 
     $.ajax({
       url: Config.FIREBASE_URL + '/sketches/' + encode(getArtworkName()) + '.json',
       type: 'PUT',
       data: JSON.stringify({
-        website: this.refs.website.getDOMNode().value,
+        website: website,
         sketch: this.refs.pad.call('toObject'),
       }),
       success: function(data) {
@@ -59,8 +66,8 @@ var Sketch = React.createClass({
         <button className="redo" onClick={this.call('redo')}>redo</button>
       </div>
       <input ref="website" type="text" placeholder="website"/>
-      <button type="submit">
-        send
+      <button disabled={this.state.loading} className={this.state.loading ? 'btn-loading' : ''} type="submit">
+        {this.state.loading ? 'loading' : 'send'}
       </button>
     </form>;
   },
