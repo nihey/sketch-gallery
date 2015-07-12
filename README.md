@@ -22,6 +22,13 @@ If you believe a sketch that has been removed should be restored,
 open an [issue](https://github.com/nihey/sketch-gallery/issues) and it'll be
 discussed.
 
+# Rules
+
+Any kind of art may be published in this gallery, it doesn't matter how hideous
+it is - its art after all. I just ask you to not flood the gallery - because if
+it does get flooded, I'll have to change this project so that only approved
+sketches are displayed.
+
 # Storage
 
 This project has it's data currently being stored at [Firebase](https://www.firebase.com),
