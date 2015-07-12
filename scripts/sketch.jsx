@@ -33,7 +33,7 @@ var Sketch = React.createClass({
     if (!this.state.website) {
       return getArtworkName();
     }
-    return <a href={this.state.website}>
+    return <a target="_blank" href={this.state.website}>
       {getArtworkName()}
     </a>
   },
