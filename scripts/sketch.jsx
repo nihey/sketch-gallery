@@ -4,10 +4,10 @@ var React = require('react'),
     {getArtworkName, encode} = require('utils');
 
 var Sketch = React.createClass({
-  call: function(func) {
+  call: function(func, args) {
     return (event) => {
       event.preventDefault();
-      this.refs.pad.call(func);
+      this.refs.pad.call(func, args);
     };
   },
 
@@ -66,6 +66,9 @@ var Sketch = React.createClass({
         <button className="redo" onClick={this.call('redo')}>redo</button>
       </div>
       <input ref="website" type="text" placeholder="website"/>
+      <button onClick={this.call('animate', [7])} type="button">
+        animate
+      </button>
       <button disabled={this.state.loading} className={this.state.loading ? 'btn-loading' : ''} type="submit">
         {this.state.loading ? 'loading' : 'send'}
       </button>

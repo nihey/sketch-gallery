@@ -11,8 +11,8 @@ Sketchpad.prototype.drawStroke = function(stroke) {
 window.$ = require('jquery');
 
 var Canvas = React.createClass({
-  call: function(func) {
-    return this.sketchpad[func]();
+  call: function(func, args) {
+    return this.sketchpad[func].apply(this.sketchpad, args);
   },
 
   tryInit: function(props) {
