@@ -8,21 +8,29 @@ var React = require('react'),
 
 var Index = React.createClass({
   componentDidMount: function() {
+    var loaded = 0;
     // Work with Firebase REST API to avoid using concurrent connections
     // while fetching data.
     $.ajax({
       url: Config.FIREBASE_URL + '/sketches.json',
       data: {shallow: true},
       success: function(data) {
+        // Randomize keys
+        var keys = Object.keys(data).sort(() => Math.random() < 0.5);
+        // To see all sketches, location.hash should be #!a
+        if (!location.hash !== '#!a') {
+          keys = keys.slice(0, 6);
+        }
+
         var sketches = {};
         data || this.setState({loading: false});
-        data && Object.keys(data).forEach(name => {
+        data && keys.forEach(name => {
           $.ajax({
             url: Config.FIREBASE_URL + '/sketches/' + name + '.json',
             context: this,
             success: function(sketch) {
               sketches[name] = sketch;
-              var loading = Object.keys(sketches).length !== Object.keys(data).length;
+              var loading = Object.keys(sketches).length !== keys.length;
               this.setState({sketches, loading});
             },
           });
